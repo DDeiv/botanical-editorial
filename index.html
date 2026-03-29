@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>The Botanical Editorial | Indoor Plant Maintenance Protocol</title>
+    <!-- Google Fonts: Noto Serif & Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Serif:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet"/>
+    <!-- Material Symbols -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "secondary-fixed-dim": "#86d7ad",
+              "primary": "#162a22",
+              "inverse-primary": "#b5ccc0",
+              "surface-variant": "#e1e3e4",
+              "surface-container-high": "#e7e8e9",
+              "surface-container-lowest": "#ffffff",
+              "surface-container-low": "#f3f4f5",
+              "secondary": "#116c4a",
+              "on-surface": "#191c1d",
+              "on-surface-variant": "#414844",
+              "background": "#ffffff",
+              /* Watering Frequency Colors (Green to Yellow) */
+              "water-freq": "#116c4a",     /* Dark Green - Frequent */
+              "water-mod": "#86d7ad",      /* Light Green - Moderate */
+              "water-rare": "#fde047"      /* Yellow - Rare */
+            },
+            fontFamily: {
+              "headline": ["Noto Serif"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+          },
+        },
+      }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        html, body {
+            overflow-x: hidden;
+            background: white;
+        }
+
+        /* Hero Gradient Animation (Optional) */
+        .hero-gradient {
+            background: radial-gradient(circle at top right, rgba(134, 215, 173, 0.4) 0%, rgba(255, 255, 255, 1) 60%);
+        }
+
+        /* Checkbox Custom Styles */
+        .check-item {
+            cursor: pointer;
+            transition: background 0.2s ease-in-out;
+        }
+        .check-item:hover {
+            background: rgba(0, 0, 0, 0.03);
+        }
+        .check-box {
+            position: relative;
+            transition: all 0.2s ease-in-out;
+            border: 2px solid #717973; 
+        }
+        .check-item.done .check-box {
+            background-color: #116c4a;
+            border-color: #116c4a;
+        }
+        .check-item.done .check-box::after {
+            content: '';
+            position: absolute;
+            left: 6px;
+            top: 2px;
+            width: 5px;
+            height: 10px;
+            border: solid white;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+        }
+        .check-item.done .check-text {
+            color: #717973;
+            text-decoration: line-through;
+        }
+        
+        .care-card { cursor: pointer; }
+        
+        /* Modal Styles */
+        #img-modal {
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        #img-modal.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        @media print {
+            .no-print { display: none !important; }
+            body { background: white; color: black; }
+            .print-border { border: 1px solid #ccc; }
+        }
+    </style>
+</head>
+<body class="text-on-surface font-body selection:bg-[#a1f4c8] selection:text-[#1b724f] relative min-h-screen hero-gradient">
+
+<!-- Modal for Images -->
+<div id="img-modal" class="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-sm p-4 no-print" onclick="closeModal()">
+    <div class="relative max-w-2xl w-full bg-white rounded-2xl overflow-hidden shadow-2xl" onclick="event.stopPropagation()">
+        <button onclick="closeModal()" class="absolute top-4 right-4 bg-white/50 hover:bg-white text-black rounded-full p-2 w-10 h-10 flex items-center justify-center transition-colors shadow-sm">
+            <span class="material-symbols-outlined">close</span>
+        </button>
+        <div class="aspect-[4/3] w-full bg-gray-100 flex items-center justify-center">
+            <img id="modal-img" src="" alt="Plant species" class="w-full h-full object-cover">
+        </div>
+        <div class="p-6">
+            <h3 id="modal-title" class="font-headline text-2xl font-bold text-primary">Plant Name</h3>
+            <p id="modal-desc" class="text-sm text-on-surface-variant mt-2 italic">Species Info</p>
+        </div>
+    </div>
+</div>
+
+<!-- TopAppBar -->
+<header class="sticky top-0 z-[60] bg-white/80 backdrop-blur-md border-b border-surface-variant/50 no-print">
+    <div class="flex justify-between items-center px-4 md:px-8 py-4 md:py-6 max-w-screen-2xl mx-auto w-full">
+        <div class="flex items-center gap-2">
+            <span class="font-headline italic text-xl md:text-2xl text-[#162a22]">The Botanical Editorial</span>
+        </div>
+        <nav class="hidden md:flex items-center gap-8">
+            <a class="font-headline font-bold tracking-tight text-[#162a22]/60 hover:text-[#162a22] transition-colors" href="#table">Directory</a>
+            <a class="font-headline font-bold tracking-tight text-[#162a22]/60 hover:text-[#162a22] transition-colors" href="#cards">Monographs</a>
+            <a class="font-headline font-bold tracking-tight text-[#162a22]/60 hover:text-[#162a22] transition-colors" href="#recovery">Recovery</a>
+            <a class="font-headline font-bold tracking-tight text-[#162a22]/60 hover:text-[#162a22] transition-colors" href="#calendar">Routines</a>
+        </nav>
+        <div class="flex items-center gap-4">
+            <button onclick="window.print()" class="hidden md:block px-4 py-2 bg-primary text-white rounded-full font-label text-xs uppercase tracking-widest font-bold hover:bg-primary/90 transition-colors shadow-md">
+                Export PDF
+            </button>
+        </div>
+    </div>
+</header>
+
+<main class="max-w-screen-2xl mx-auto px-4 sm:px-6 md:px-12 py-8 md:py-16">
+
+    <!-- Hero Section -->
+    <section class="mb-16 md:mb-24 relative z-10">
+        <div class="flex flex-col gap-6 md:gap-12 w-full max-w-2xl mt-12 md:mt-24">
+            <h1 class="font-headline text-5xl sm:text-6xl md:text-8xl font-bold text-primary tracking-tight leading-[1.1] mb-2">
+                Indoor<br>Plant <br/><span class="italic font-normal text-primary/80">Maintenance Protocol</span>
+            </h1>
+            <p class="text-on-surface-variant text-base sm:text-lg max-w-lg leading-relaxed font-semibold">
+                A definitive archival collection of care protocols for your 12 species. 
+                Structured for longevity, scannability, and horticultural precision.
+            </p>
+        </div>
+    </section>
+
+    <!-- Master Maintenance Table -->
+    <section id="table" class="mb-16 md:mb-24">
+        <div class="mb-8 md:mb-10">
+            <h2 class="font-headline text-2xl md:text-3xl font-bold text-primary mb-2">Master Reference</h2>
+            <div class="h-1 w-16 bg-primary mb-4 md:mb-6 rounded-full"></div>
+            <p class="text-sm text-on-surface-variant font-medium">Click on any plant name to view its reference image.</p>
+        </div>
+        <div class="overflow-x-auto no-scrollbar rounded-xl border border-outline-variant/50 bg-white">
+            <table class="w-full text-left border-collapse bg-surface-container-lowest min-w-[600px]">
+                <thead>
+                    <tr class="bg-surface-container-high border-b border-outline-variant/30">
+                        <th class="p-4 md:p-5 font-label text-[10px] uppercase tracking-widest text-on-surface-variant font-bold">Plant Identity</th>
+                        <th class="p-4 md:p-5 font-label text-[10px] uppercase tracking-widest text-on-surface-variant font-bold">Light Protocol</th>
+                        <th class="p-4 md:p-5 font-label text-[10px] uppercase tracking-widest text-on-surface-variant font-bold">Water Frequency</th>
+                        <th class="p-4 md:p-5 font-label text-[10px] uppercase tracking-widest text-on-surface-variant font-bold">Drama Level</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-outline-variant/30">
+                    <!-- Frequent -->
+                    <tr class="hover:bg-surface-container-low transition-colors cursor-pointer" onclick="openModal('Vittorio il Vanitoso', 'Coleus', 'https://images.unsplash.com/photo-1545239351-ef35f43d514b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80')">
+                        <td class="p-4 md:p-5">
+                            <span class="font-headline font-bold text-primary block text-sm border-b border-transparent hover:border-primary inline-block">Vittorio il Vanitoso</span>
+                            <span class="text-xs text-on-surface-variant italic block mt-0.5">Coleus</span>
+                        </td>
+                        <td class="p-4 md:p-5 text-xs md:text-sm">Bright indirect</td>
+                        <td class="p-4 md:p-5"><span class="px-2 md:px-3 py-1 bg-water-freq text-white rounded text-[9px] md:text-[10px] font-bold uppercase shadow-sm">Frequent</span></td>
+                        <td class="p-4 md:p-5 text-xs md:text-sm">Medium</td>
+                    </tr>
+                    <tr class="bg-surface-container-low/20 hover:bg-surface-container-low transition-colors cursor-pointer" onclick="openModal('Tito il Tropicale', 'Dwarf Banana', 'https://images.unsplash.com/photo-1597055181308-f213df65d8db?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80')">
+                        <td class="p-4 md:p-5">
+                            <span class="font-headline font-bold text-primary block text-sm border-b border-transparent hover:border-primary inline-block">Tito il Tropicale</span>
+                            <span class="text-xs text-on-surface-variant italic block mt-0.5">Dwarf Banana</span>
+                        </td>
+                        <td class="p-4 md:p-5 text-xs md:text-sm">Full sun</td>
+                        <td class="p-4 md:p-5"><span class="px-2 md:px-3 py-1 bg-water-freq text-white rounded text-[9px] md:text-[10px] font-bold uppercase shadow-sm">Frequent</span></td>
+                        <td class="p-4 md:p-5 text-xs md:text-sm">High</td>
+                    </tr>
+                    <tr class="hover:bg-surface-container-low transition-colors cursor-pointer" onclick="openModal('Beppe il Paludoso', 'Papyrus', 'https://images.unsplash.com/photo-1600411833196-7c0fecff0f81?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80')">
+                        <td class="p-4 md:p-5">
+                            <span class="font-headline font-bold text-primary block text-sm border-b border-transparent hover:border-primary inline-block">Beppe il Paludoso</span>
+                            <span class="text-xs text-on-surface-variant italic block mt-0.5">Papyrus</span>
+                        </td>
+                        <td class="p-4 md:p-5 text-xs md:text-sm">Full sun / Bright</td>
+                        <td class="p-4 md:p-5"><span class="px-2 md:px-3 py-1 bg-water-freq text-white rounded text-[9px] md:text-[10px] font-bold uppercase shadow-sm">Frequent</span></td>
+                        <td class="p-4 md:p-5 text-xs md:text-sm">High</td>
+                    </tr>
+                    <!-- Moderate -->
+                    <tr class="bg-surface-container-low/20 hover:bg-surface-container-low transition-colors cursor-pointer" onclick="openModal('Pino il Precisino', 'Dracaena marginata', 'https://images.unsplash.com/photo-1616046229478-9901c5536a45?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80')">
+                        <td class="p-4 md:p-5">
+                            <span class="font-headline font-bold text-primary block text-sm border-b border-transparent hover:border-primary inline-block">Pino il Precisino</span>
+                            <span class="text-xs text-on-surface-variant italic block mt-0.5">Dracaena marginata</span>
+                        </td>
+                        <td class="p-4 md:p-5 text-xs md:text-sm">Bright indirect</td>
+                        <td class="p-4 md:p-5"><span class="px-2 md:px-3 py-1 bg-water-mod text-[#0b1f18] rounded text-[9px] md:text-[10px] font-bold uppercase shadow-sm">Moderate</span></td>
+                        <td class="p-4 md:p-5 text-xs md:text-sm">Medium</td>
+                    </tr>
+                    <tr class="hover:bg-surface-container-low transition-colors cursor-pointer" onclick="openModal('Gino lo Spilungone', 'Monstera deliciosa', 'https://images.unsplash.com/photo-1614594975525-e45190c55d0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80')">
+                        <td class="p-4 md:p-5">
+                            <span class="font-headline font-bold text-primary block text-sm border-b border-transparent hover:border-primary inline-block">Gino lo Spilungone</span>
+                            <span class="text-xs text-on-surface-variant italic block mt-0.5">Monstera deliciosa</span>
+                        </td>
+                        <td class="p-4 md:p-5 text-xs md:text-sm">Bright indirect</td>
+                        <td class="p-4 md:p-5"><span class="px-2 md:px-3 py-1 bg-water-mod text-[#0b1f18] rounded text-[9px] md:text-[10px] font-bold uppercase shadow-sm">Moderate</span></td>
+                        <td class="p-4 md:p-5 text-xs md:text-sm">Medium</td>
+                    </tr>
+                    <tr class="bg-surface-container-low/20 hover:bg-surface-container-low transition-colors cursor-pointer" onclick="openModal('Ubaldo il Polveroso', 'Dracaena Compacta', 'https://images.unsplash.com/photo-1610808386341-b8f41e57c8bf?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80')">
+                        <td class="p-4 md:p-5">
+                            <span class="font-headline font-bold text-primary block text-sm border-b border-transparent hover:border-primary inline-block">Ubaldo il Polveroso</span>
+                            <span class="text-xs text-on-surface-variant italic block mt-0.5">Dracaena Compacta</span>
+                        </td>
+                        <td class="p-4 md:p-5 text-xs md:text-sm">Low to Medium</td>
+                        <td class="p-4 md:p-5"><span class="px-2 md:px-3 py-1 bg-water-mod text-[#0b1f18] rounded text-[9px] md:text-[10px] font-bold uppercase shadow-sm">Moderate</span></td>
+                        <td class="p-4 md:p-5 text-xs md:text-sm">Low</td>
+                    </tr>
+                    <tr class="hover:bg-surface-container-low transition-colors cursor-pointer" onclick="openModal('Regina la Drammatica', 'Peace Lily', 'https://images.unsplash.com/photo-1593691509543-c20fb51c114d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80')">
+                        <td class="p-4 md:p-5">
+                            <span class="font-headline font-bold text-primary block text-sm border-b border-transparent hover:border-primary inline-block">Regina la Drammatica</span>
+                            <span class="text-xs text-on-surface-variant italic block mt-0.5">Peace Lily</span>
+                        </td>
+                        <td class="p-4 md:p-5 text-xs md:text-sm">Medium indirect</td>
+                        <td class="p-4 md:p-5"><span class="px-2 md:px-3 py-1 bg-water-mod text-[#0b1f18] rounded text-[9px] md:text-[10px] font-bold uppercase shadow-sm">Moderate</span></td>
+                        <td class="p-4 md:p-5 text-xs md:text-sm">High</td>
+                    </tr>
+                    <tr class="bg-surface-container-low/20 hover:bg-surface-container-low transition-colors cursor-pointer" onclick="openModal('Diva la Pois', 'Begonia maculata', 'https://images.unsplash.com/photo-1612344070669-7ed97ebf0590?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80')">
+                        <td class="p-4 md:p-5">
+                            <span class="font-headline font-bold text-primary block text-sm border-b border-transparent hover:border-primary inline-block">Diva la Pois</span>
+                            <span class="text-xs text-on-surface-variant italic block mt-0.5">Begonia maculata</span>
+                        </td>
+                        <td class="p-4 md:p-5 text-xs md:text-sm">Bright indirect</td>
+                        <td class="p-4 md:p-5"><span class="px-2 md:px-3 py-1 bg-water-mod text-[#0b1f18] rounded text-[9px] md:text-[10px] font-bold uppercase shadow-sm">Moderate</span></td>
+                        <td class="p-4 md:p-5 text-xs md:text-sm">High</td>
+                    </tr>
+                    <!-- Rare -->
+                    <tr class="hover:bg-surface-container-low transition-colors cursor-pointer" onclick="openModal('Rocco la Roccia', 'Jade Plant', 'https://images.unsplash.com/photo-1509423350716-97f9360b4e09?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80')">
+                        <td class="p-4 md:p-5">
+                            <span class="font-headline font-bold text-primary block text-sm border-b border-transparent hover:border-primary inline-block">Rocco la Roccia</span>
+                            <span class="text-xs text-on-surface-variant italic block mt-0.5">Jade Plant</span>
+                        </td>
+                        <td class="p-4 md:p-5 text-xs md:text-sm">Full sun</td>
+                        <td class="p-4 md:p-5"><span class="px-2 md:px-3 py-1 bg-water-rare text-[#422006] rounded text-[9px] md:text-[10px] font-bold uppercase shadow-sm">Rare</span></td>
+                        <td class="p-4 md:p-5 text-xs md:text-sm">Low</td>
+                    </tr>
+                    <tr class="bg-surface-container-low/20 hover:bg-surface-container-low transition-colors cursor-pointer" onclick="openModal('Marcello lo Splendente', 'Hoya Splash', 'https://images.unsplash.com/photo-1599598425947-330026293905?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80')">
+                        <td class="p-4 md:p-5">
+                            <span class="font-headline font-bold text-primary block text-sm border-b border-transparent hover:border-primary inline-block">Marcello lo Splendente</span>
+                            <span class="text-xs text-on-surface-variant italic block mt-0.5">Hoya Splash</span>
+                        </td>
+                        <td class="p-4 md:p-5 text-xs md:text-sm">Morning sun</td>
+                        <td class="p-4 md:p-5"><span class="px-2 md:px-3 py-1 bg-water-rare text-[#422006] rounded text-[9px] md:text-[10px] font-bold uppercase shadow-sm">Rare</span></td>
+                        <td class="p-4 md:p-5 text-xs md:text-sm">Low</td>
+                    </tr>
+                    <tr class="hover:bg-surface-container-low transition-colors cursor-pointer" onclick="openModal('Indro l\'Indistruttibile', 'ZZ Plant', 'https://images.unsplash.com/photo-1632207691143-643e2a9a9361?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80')">
+                        <td class="p-4 md:p-5">
+                            <span class="font-headline font-bold text-primary block text-sm border-b border-transparent hover:border-primary inline-block">Indro l'Indistruttibile</span>
+                            <span class="text-xs text-on-surface-variant italic block mt-0.5">ZZ Plant</span>
+                        </td>
+                        <td class="p-4 md:p-5 text-xs md:text-sm">Low to Bright</td>
+                        <td class="p-4 md:p-5"><span class="px-2 md:px-3 py-1 bg-water-rare text-[#422006] rounded text-[9px] md:text-[10px] font-bold uppercase shadow-sm">Rare</span></td>
+                        <td class="p-4 md:p-5 text-xs md:text-sm">Very Low</td>
+                    </tr>
+                    <tr class="bg-surface-container-low/20 hover:bg-surface-container-low transition-colors cursor-pointer" onclick="openModal('Sole il Bagnante', 'Aloe Vera / Agave', 'https://images.unsplash.com/photo-1596547609652-9fc5d8d42409?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80')">
+                        <td class="p-4 md:p-5">
+                            <span class="font-headline font-bold text-primary block text-sm border-b border-transparent hover:border-primary inline-block">Sole il Bagnante</span>
+                            <span class="text-xs text-on-surface-variant italic block mt-0.5">Aloe Vera / Agave</span>
+                        </td>
+                        <td class="p-4 md:p-5 text-xs md:text-sm">Full sun</td>
+                        <td class="p-4 md:p-5"><span class="px-2 md:px-3 py-1 bg-water-rare text-[#422006] rounded text-[9px] md:text-[10px] font-bold uppercase shadow-sm">Rare</span></td>
+                        <td class="p-4 md:p-5 text-xs md:text-sm">Low</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- Individual Care Cards Grid -->
+    <section id="cards" class="mb-16 md:mb-24">
+        <div class="mb-8 md:mb-10 lg:text-center">
+            <p class="font-label text-xs md:text-[10px] uppercase tracking-widest text-[#116c4a] font-bold mb-2">The Collection</p>
+            <h2 class="font-headline text-3xl md:text-4xl font-bold text-primary">Care Monographs</h2>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8">
+            
+            <!-- FREQUENT CARDS (Dark Green) -->
+            <article onclick="openModal('Vittorio il Vanitoso', 'Coleus', 'https://images.unsplash.com/photo-1545239351-ef35f43d514b?ixlib=rb-4.0.3')" class="care-card bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-all transform hover:-translate-y-1 border-t-[6px] border-water-freq print-border">
+                <div class="p-5 md:p-6 bg-surface-container-high/50 border-b border-outline-variant/10">
+                    <h3 class="font-headline font-bold text-primary text-xl leading-tight">Vittorio il Vanitoso</h3>
+                    <p class="text-[10px] font-label uppercase tracking-widest text-on-surface-variant mt-1 font-bold">Coleus</p>
+                </div>
+                <div class="p-5 md:p-6 space-y-4">
+                    <div>
+                        <p class="text-[9px] font-bold uppercase text-water-freq tracking-widest mb-1.5 flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-water-freq"></span> WATERING: FREQUENT</p>
+                        <p class="text-[13px] md:text-sm text-on-surface leading-relaxed">High thirst. Keep soil consistently damp.</p>
+                    </div>
+                    <div>
+                        <p class="text-[9px] font-bold uppercase text-outline tracking-wider mb-1">Light</p>
+                        <p class="text-[13px] md:text-sm text-on-surface leading-relaxed">Bright indirect to preserve vibrant hues.</p>
+                    </div>
+                </div>
+            </article>
+
+            <article onclick="openModal('Tito il Tropicale', 'Dwarf Banana', 'https://images.unsplash.com/photo-1597055181308-f213df65d8db?ixlib=rb-4.0.3')" class="care-card bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-all transform hover:-translate-y-1 border-t-[6px] border-water-freq print-border">
+                <div class="p-5 md:p-6 bg-surface-container-high/50 border-b border-outline-variant/10">
+                    <h3 class="font-headline font-bold text-primary text-xl leading-tight">Tito il Tropicale</h3>
+                    <p class="text-[10px] font-label uppercase tracking-widest text-on-surface-variant mt-1 font-bold">Dwarf Banana</p>
+                </div>
+                <div class="p-5 md:p-6 space-y-4">
+                    <div>
+                        <p class="text-[9px] font-bold uppercase text-water-freq tracking-widest mb-1.5 flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-water-freq"></span> WATERING: FREQUENT</p>
+                        <p class="text-[13px] md:text-sm text-on-surface leading-relaxed">Never dry out. High metabolic need.</p>
+                    </div>
+                    <div>
+                        <p class="text-[9px] font-bold uppercase text-outline tracking-wider mb-1">Light</p>
+                        <p class="text-[13px] md:text-sm text-on-surface leading-relaxed">Maximum possible light. Direct sun.</p>
+                    </div>
+                </div>
+            </article>
+
+            <article onclick="openModal('Beppe il Paludoso', 'Papyrus', 'https://images.unsplash.com/photo-1600411833196-7c0fecff0f81?ixlib=rb-4.0.3')" class="care-card bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-all transform hover:-translate-y-1 border-t-[6px] border-water-freq print-border">
+                <div class="p-5 md:p-6 bg-surface-container-high/50 border-b border-outline-variant/10">
+                    <h3 class="font-headline font-bold text-primary text-xl leading-tight">Beppe il Paludoso</h3>
+                    <p class="text-[10px] font-label uppercase tracking-widest text-on-surface-variant mt-1 font-bold">Papyrus</p>
+                </div>
+                <div class="p-5 md:p-6 space-y-4">
+                    <div>
+                         <p class="text-[9px] font-bold uppercase text-water-freq tracking-widest mb-1.5 flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-water-freq"></span> WATERING: FREQUENT</p>
+                        <p class="text-[13px] md:text-sm text-on-surface leading-relaxed">Must sit continuously in standing water.</p>
+                    </div>
+                    <div>
+                        <p class="text-[9px] font-bold uppercase text-outline tracking-wider mb-1">Light</p>
+                        <p class="text-[13px] md:text-sm text-on-surface leading-relaxed">Full sun to bright light. Avoid shade.</p>
+                    </div>
+                </div>
+            </article>
+
+            <!-- MODERATE CARDS (Light Green) -->
+            <article onclick="openModal('Pino il Precisino', 'Dracaena marginata', 'https://images.unsplash.com/photo-1616046229478-9901c5536a45?ixlib=rb-4.0.3')" class="care-card bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-all transform hover:-translate-y-1 border-t-[6px] border-water-mod print-border">
+                <div class="p-5 md:p-6 bg-surface-container-high/50 border-b border-outline-variant/10">
+                    <h3 class="font-headline font-bold text-primary text-xl leading-tight">Pino il Precisino</h3>
+                    <p class="text-[10px] font-label uppercase tracking-widest text-on-surface-variant mt-1 font-bold">Dracaena marginata</p>
+                </div>
+                <div class="p-5 md:p-6 space-y-4">
+                    <div>
+                        <p class="text-[9px] font-bold uppercase text-[#1b724f] tracking-widest mb-1.5 flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-water-mod"></span> WATERING: MODERATE</p>
+                        <p class="text-[13px] md:text-sm text-on-surface leading-relaxed">Dry top 2 inches. Highly sensitive to tap water.</p>
+                    </div>
+                    <div>
+                        <p class="text-[9px] font-bold uppercase text-outline tracking-wider mb-1">Light</p>
+                        <p class="text-[13px] md:text-sm text-on-surface leading-relaxed">Bright filtered to protect variegated edges.</p>
+                    </div>
+                </div>
+            </article>
+
+            <article onclick="openModal('Gino lo Spilungone', 'Monstera deliciosa', 'https://images.unsplash.com/photo-1614594975525-e45190c55d0b?ixlib=rb-4.0.3')" class="care-card bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-all transform hover:-translate-y-1 border-t-[6px] border-water-mod print-border">
+                <div class="p-5 md:p-6 bg-surface-container-high/50 border-b border-outline-variant/10">
+                    <h3 class="font-headline font-bold text-primary text-xl leading-tight">Gino lo Spilungone</h3>
+                    <p class="text-[10px] font-label uppercase tracking-widest text-on-surface-variant mt-1 font-bold">Monstera deliciosa</p>
+                </div>
+                <div class="p-5 md:p-6 space-y-4">
+                    <div>
+                        <p class="text-[9px] font-bold uppercase text-[#1b724f] tracking-widest mb-1.5 flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-water-mod"></span> WATERING: MODERATE</p>
+                        <p class="text-[13px] md:text-sm text-on-surface leading-relaxed">Dry top 75% before a thorough soak.</p>
+                    </div>
+                    <div>
+                        <p class="text-[9px] font-bold uppercase text-outline tracking-wider mb-1">Light</p>
+                        <p class="text-[13px] md:text-sm text-on-surface leading-relaxed">Bright indirect. Needs support stake!</p>
+                    </div>
+                </div>
+            </article>
+
+            <article onclick="openModal('Ubaldo il Polveroso', 'Dracaena Compacta', 'https://images.unsplash.com/photo-1610808386341-b8f41e57c8bf?ixlib=rb-4.0.3')" class="care-card bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-all transform hover:-translate-y-1 border-t-[6px] border-water-mod print-border">
+                <div class="p-5 md:p-6 bg-surface-container-high/50 border-b border-outline-variant/10">
+                    <h3 class="font-headline font-bold text-primary text-xl leading-tight">Ubaldo il Polveroso</h3>
+                    <p class="text-[10px] font-label uppercase tracking-widest text-on-surface-variant mt-1 font-bold">Dracaena Compacta</p>
+                </div>
+                <div class="p-5 md:p-6 space-y-4">
+                    <div>
+                        <p class="text-[9px] font-bold uppercase text-[#1b724f] tracking-widest mb-1.5 flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-water-mod"></span> WATERING: MODERATE</p>
+                        <p class="text-[13px] md:text-sm text-on-surface leading-relaxed">Consistent moisture. Do not overwater.</p>
+                    </div>
+                    <div>
+                        <p class="text-[9px] font-bold uppercase text-outline tracking-wider mb-1">Light</p>
+                        <p class="text-[13px] md:text-sm text-on-surface leading-relaxed">Low to Medium light. Shade tolerant.</p>
+                    </div>
+                </div>
+            </article>
+
+            <article onclick="openModal('Regina la Drammatica', 'Peace Lily', 'https://images.unsplash.com/photo-1593691509543-c20fb51c114d?ixlib=rb-4.0.3')" class="care-card bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-all transform hover:-translate-y-1 border-t-[6px] border-water-mod print-border">
+                <div class="p-5 md:p-6 bg-surface-container-high/50 border-b border-outline-variant/10">
+                    <h3 class="font-headline font-bold text-primary text-xl leading-tight">Regina la Drammatica</h3>
+                    <p class="text-[10px] font-label uppercase tracking-widest text-on-surface-variant mt-1 font-bold">Peace Lily</p>
+                </div>
+                <div class="p-5 md:p-6 space-y-4">
+                    <div>
+                        <p class="text-[9px] font-bold uppercase text-[#1b724f] tracking-widest mb-1.5 flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-water-mod"></span> WATERING: MODERATE</p>
+                        <p class="text-[13px] md:text-sm text-on-surface leading-relaxed">Droop-based watering indicator.</p>
+                    </div>
+                    <div>
+                        <p class="text-[9px] font-bold uppercase text-outline tracking-wider mb-1">Light</p>
+                        <p class="text-[13px] md:text-sm text-on-surface leading-relaxed">Medium indirect. Browning tips from dry air.</p>
+                    </div>
+                </div>
+            </article>
+
+             <article onclick="openModal('Diva la Pois', 'Begonia maculata', 'https://images.unsplash.com/photo-1612344070669-7ed97ebf0590?ixlib=rb-4.0.3')" class="care-card bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-all transform hover:-translate-y-1 border-t-[6px] border-water-mod print-border">
+                <div class="p-5 md:p-6 bg-surface-container-high/50 border-b border-outline-variant/10">
+                    <h3 class="font-headline font-bold text-primary text-xl leading-tight">Diva la Pois</h3>
+                    <p class="text-[10px] font-label uppercase tracking-widest text-on-surface-variant mt-1 font-bold">Begonia maculata</p>
+                </div>
+                <div class="p-5 md:p-6 space-y-4">
+                    <div>
+                        <p class="text-[9px] font-bold uppercase text-[#1b724f] tracking-widest mb-1.5 flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-water-mod"></span> WATERING: MODERATE</p>
+                        <p class="text-[13px] md:text-sm text-on-surface leading-relaxed">Dry top inch. Needs humidity but dry foliage.</p>
+                    </div>
+                    <div>
+                        <p class="text-[9px] font-bold uppercase text-outline tracking-wider mb-1">Light</p>
+                        <p class="text-[13px] md:text-sm text-on-surface leading-relaxed">Bright indirect. No direct sun.</p>
+                    </div>
+                </div>
+            </article>
+
+            <!-- RARE CARDS (Yellow) -->
+            <article onclick="openModal('Rocco la Roccia', 'Jade Plant', 'https://images.unsplash.com/photo-1509423350716-97f9360b4e09?ixlib=rb-4.0.3')" class="care-card bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-all transform hover:-translate-y-1 border-t-[6px] border-water-rare print-border">
+                <div class="p-5 md:p-6 bg-surface-container-high/50 border-b border-outline-variant/10">
+                    <h3 class="font-headline font-bold text-primary text-xl leading-tight">Rocco la Roccia</h3>
+                    <p class="text-[10px] font-label uppercase tracking-widest text-on-surface-variant mt-1 font-bold">Jade Plant</p>
+                </div>
+                <div class="p-5 md:p-6 space-y-4">
+                    <div>
+                        <p class="text-[9px] font-bold uppercase text-[#854d0e] tracking-widest mb-1.5 flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-water-rare"></span> WATERING: RARE</p>
+                        <p class="text-[13px] md:text-sm text-on-surface leading-relaxed">Bone dry. Succulent protocol.</p>
+                    </div>
+                    <div>
+                        <p class="text-[9px] font-bold uppercase text-outline tracking-wider mb-1">Light</p>
+                        <p class="text-[13px] md:text-sm text-on-surface leading-relaxed">Full sun. Rotate periodically to fix leaning.</p>
+                    </div>
+                </div>
+            </article>
+
+            <article onclick="openModal('Marcello lo Splendente', 'Hoya Splash', 'https://images.unsplash.com/photo-1599598425947-330026293905?ixlib=rb-4.0.3')" class="care-card bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-all transform hover:-translate-y-1 border-t-[6px] border-water-rare print-border">
+                <div class="p-5 md:p-6 bg-surface-container-high/50 border-b border-outline-variant/10">
+                    <h3 class="font-headline font-bold text-primary text-xl leading-tight">Marcello lo Splendente</h3>
+                    <p class="text-[10px] font-label uppercase tracking-widest text-on-surface-variant mt-1 font-bold">Hoya Splash</p>
+                </div>
+                <div class="p-5 md:p-6 space-y-4">
+                    <div>
+                        <p class="text-[9px] font-bold uppercase text-[#854d0e] tracking-widest mb-1.5 flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-water-rare"></span> WATERING: RARE</p>
+                        <p class="text-[13px] md:text-sm text-on-surface leading-relaxed">Allow to dry completely. Leaves hold water.</p>
+                    </div>
+                    <div>
+                        <p class="text-[9px] font-bold uppercase text-outline tracking-wider mb-1">Light</p>
+                        <p class="text-[13px] md:text-sm text-on-surface leading-relaxed">Morning sun preferred.</p>
+                    </div>
+                </div>
+            </article>
+
+            <article onclick="openModal('Indro l\'Indistruttibile', 'ZZ Plant', 'https://images.unsplash.com/photo-1632207691143-643e2a9a9361?ixlib=rb-4.0.3')" class="care-card bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-all transform hover:-translate-y-1 border-t-[6px] border-water-rare print-border">
+                <div class="p-5 md:p-6 bg-surface-container-high/50 border-b border-outline-variant/10">
+                    <h3 class="font-headline font-bold text-primary text-xl leading-tight">Indro l'Indistruttibile</h3>
+                    <p class="text-[10px] font-label uppercase tracking-widest text-on-surface-variant mt-1 font-bold">ZZ Plant</p>
+                </div>
+                <div class="p-5 md:p-6 space-y-4">
+                    <div>
+                        <p class="text-[9px] font-bold uppercase text-[#854d0e] tracking-widest mb-1.5 flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-water-rare"></span> WATERING: RARE</p>
+                        <p class="text-[13px] md:text-sm text-on-surface leading-relaxed">Once a month maximum. Will rot if wet.</p>
+                    </div>
+                    <div>
+                        <p class="text-[9px] font-bold uppercase text-outline tracking-wider mb-1">Light</p>
+                        <p class="text-[13px] md:text-sm text-on-surface leading-relaxed">Adapts to any light level securely.</p>
+                    </div>
+                </div>
+            </article>
+
+            <article onclick="openModal('Sole il Bagnante', 'Aloe Vera / Agave', 'https://images.unsplash.com/photo-1596547609652-9fc5d8d42409?ixlib=rb-4.0.3')" class="care-card bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-all transform hover:-translate-y-1 border-t-[6px] border-water-rare print-border">
+                <div class="p-5 md:p-6 bg-surface-container-high/50 border-b border-outline-variant/10">
+                    <h3 class="font-headline font-bold text-primary text-xl leading-tight">Sole il Bagnante</h3>
+                    <p class="text-[10px] font-label uppercase tracking-widest text-on-surface-variant mt-1 font-bold">Aloe Vera / Agave</p>
+                </div>
+                <div class="p-5 md:p-6 space-y-4">
+                    <div>
+                        <p class="text-[9px] font-bold uppercase text-[#854d0e] tracking-widest mb-1.5 flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-water-rare"></span> WATERING: RARE</p>
+                        <p class="text-[13px] md:text-sm text-on-surface leading-relaxed">Extremely sparse. Deep soak every 4 weeks.</p>
+                    </div>
+                    <div>
+                        <p class="text-[9px] font-bold uppercase text-outline tracking-wider mb-1">Light</p>
+                        <p class="text-[13px] md:text-sm text-on-surface leading-relaxed">Full, raw sun to maintain leaf structure.</p>
+                    </div>
+                </div>
+            </article>
+
+        </div>
+    </section>
+
+    <!-- Recovery & Troubleshooting -->
+    <section id="recovery" class="mb-16 md:mb-24 bg-primary rounded-2xl p-6 sm:p-8 md:p-12 text-white overflow-hidden relative shadow-lg print-border">
+        <div class="absolute inset-0 opacity-5 pointer-events-none flex items-center justify-end -translate-y-10 translate-x-10 overflow-hidden">
+             <span class="material-symbols-outlined text-[300px]" data-icon="healing">healing</span>
+        </div>
+        <div class="relative z-10 w-full">
+            <h2 class="font-headline text-2xl md:text-3xl font-bold mb-6 md:mb-8 text-[#a1f4c8]">Recovery Protocols</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10">
+                <div class="bg-white/5 p-5 md:p-6 rounded-xl border border-white/10">
+                    <h4 class="font-headline text-lg md:text-xl mb-3 font-semibold text-white">Coleus Rejuvenation</h4>
+                    <p class="text-[13px] md:text-sm text-white/80 leading-relaxed mb-4">If Vittorio looks vine-like, perform a <strong>Pinch</strong>. Cut stems back to just above a leaf node. This triggers dormant buds, creating a lush habit.</p>
+                    <span class="inline-block bg-[#86d7ad]/20 text-[#86d7ad] font-label text-[10px] uppercase font-bold tracking-widest px-2 py-1 rounded">Status: Active Pruning</span>
+                </div>
+                <div class="bg-white/5 p-5 md:p-6 rounded-xl border border-white/10">
+                    <h4 class="font-headline text-lg md:text-xl mb-3 font-semibold text-white">Monstera Acclimation</h4>
+                    <p class="text-[13px] md:text-sm text-white/80 leading-relaxed mb-4">Gino's small leaves without holes indicate light starvation. Gradually move closer to a window over 7 days. Tie to a <strong>moss pole</strong> for support.</p>
+                    <span class="inline-block bg-[#86d7ad]/20 text-[#86d7ad] font-label text-[10px] uppercase font-bold tracking-widest px-2 py-1 rounded">Status: Light Transition</span>
+                </div>
+                <div class="bg-white/5 p-5 md:p-6 rounded-xl border border-white/10">
+                    <h4 class="font-headline text-lg md:text-xl mb-3 font-semibold text-white">Humidity Triage</h4>
+                    <p class="text-[13px] md:text-sm text-white/80 leading-relaxed mb-4">Tito, Regina, and Diva suffer crispy edges in dry air. Group them together, use pebble trays, and run a localized humidifier.</p>
+                    <span class="inline-block bg-[#86d7ad]/20 text-[#86d7ad] font-label text-[10px] uppercase font-bold tracking-widest px-2 py-1 rounded">Status: Environmental</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Plant Parent Calendar Checklists -->
+    <section id="calendar" class="mb-16 md:mb-20">
+        <div class="mb-8 md:mb-10 lg:text-center">
+            <h2 class="font-headline text-2xl md:text-3xl font-bold text-primary">Routine Schedule</h2>
+            <p class="text-xs md:text-sm text-on-surface-variant font-medium mt-1">Archived maintenance cycles for consistent growth. Progress syncs automatically.</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+            
+            <div class="bg-surface-container-lowest rounded-xl p-5 md:p-8 border border-outline-variant/30 shadow-sm print-border">
+                <div class="flex items-center justify-between mb-6 pb-4 border-b border-outline-variant/20">
+                    <div class="flex items-center gap-3">
+                        <span class="material-symbols-outlined text-primary bg-primary/5 p-2 rounded-lg" data-icon="calendar_view_week">calendar_view_week</span>
+                        <h3 class="font-headline text-lg md:text-xl font-bold text-primary">Weekly Protocol</h3>
+                    </div>
+                    <span id="weekly-status" class="bg-primary/10 text-primary px-3 py-1 rounded-full text-[10px] md:text-xs font-bold font-label tracking-widest uppercase">0 / 6</span>
+                </div>
+                <!-- Checklist wrapper with max height for extreme mobile screens if needed, but flex-col is fine -->
+                <div id="weekly-checklist" class="space-y-3">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+
+            <div class="bg-surface-container-lowest rounded-xl p-5 md:p-8 border border-outline-variant/30 shadow-sm print-border">
+                <div class="flex items-center justify-between mb-6 pb-4 border-b border-outline-variant/20">
+                    <div class="flex items-center gap-3">
+                        <span class="material-symbols-outlined text-secondary bg-secondary/5 p-2 rounded-lg" data-icon="calendar_month">calendar_month</span>
+                        <h3 class="font-headline text-lg md:text-xl font-bold text-primary">Monthly Protocol</h3>
+                    </div>
+                    <span id="monthly-status" class="bg-secondary/10 text-secondary px-3 py-1 rounded-full text-[10px] md:text-xs font-bold font-label tracking-widest uppercase">0 / 4</span>
+                </div>
+                <div id="monthly-checklist" class="space-y-3">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+</main>
+
+<script src="script.js"></script>
+<script>
+    function openModal(title, desc, imgSrc) {
+        document.getElementById('modal-img').src = imgSrc;
+        document.getElementById('modal-title').innerText = title;
+        document.getElementById('modal-desc').innerText = desc;
+        document.getElementById('img-modal').classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+        document.getElementById('img-modal').classList.remove('active');
+        document.body.style.overflow = '';
+        /* brief timeout to reset img src to prevent flash on next open */
+        setTimeout(() => {
+            document.getElementById('modal-img').src = '';
+        }, 300);
+    }
+
+    // Close on escape key
+    document.addEventListener('keydown', function(event) {
+        if (event.key === "Escape") {
+            closeModal();
+        }
+    });
+</script>
+</body>
+</html>
