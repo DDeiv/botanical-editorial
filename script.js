@@ -1,8 +1,8 @@
 const weeklyTasks = [
     { id: 'w1', text: 'Hydration Assessment', sub: 'Manual moisture check on top 2 inches. Exclude Aloe and Jade.' },
     { id: 'w2', text: 'Reservoir Protocol', sub: 'Verify Papyrus "Beppe" remains in standing water.' },
-    { id: 'w3', text: 'Foliage Audit', sub: 'Check Coleus and Begonia undersides for signs of pests.' },
-    { id: 'w4', text: 'Growth Interception', sub: 'Pinch any emerging Coleus flower spikes to maintain leaves.' },
+    { id: 'w3', text: 'Foliage Audit', sub: 'Check Calathea and Begonia undersides for signs of pests.' },
+    { id: 'w4', text: 'Distilled Diet', sub: 'Ensure Calathea "Carlotta" gets flush with pure distilled water.' },
     { id: 'w5', text: 'Drainage Clear', sub: 'Empty catch pots completely to deter root suffocation.' },
     { id: 'w6', text: 'Symmetry Rotation', sub: 'Turn Jade and Aloe 90-degrees against the light source.' }
 ];
@@ -128,5 +128,4 @@ function updateCounters(type, total) {
     }
 }
 
-// Initialize on load
 document.addEventListener('DOMContentLoaded', initChecklists);

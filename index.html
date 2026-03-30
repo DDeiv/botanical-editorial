@@ -26,10 +26,9 @@
               "on-surface": "#191c1d",
               "on-surface-variant": "#414844",
               "background": "#ffffff",
-              /* Watering Frequency Colors (Green to Yellow) */
-              "water-freq": "#116c4a",     /* Dark Green - Frequent */
-              "water-mod": "#86d7ad",      /* Light Green - Moderate */
-              "water-rare": "#fde047"      /* Yellow - Rare */
+              "water-freq": "#116c4a",     
+              "water-mod": "#86d7ad",      
+              "water-rare": "#fde047"      
             },
             fontFamily: {
               "headline": ["Noto Serif"],
@@ -41,74 +40,20 @@
       }
     </script>
     <style>
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-            vertical-align: middle;
-        }
-        .no-scrollbar::-webkit-scrollbar {
-            display: none;
-        }
-        html, body {
-            overflow-x: hidden;
-            background: white;
-        }
-
-        /* Hero Gradient Animation (Optional) */
-        .hero-gradient {
-            background: radial-gradient(circle at top right, rgba(134, 215, 173, 0.4) 0%, rgba(255, 255, 255, 1) 60%);
-        }
-
-        /* Checkbox Custom Styles */
-        .check-item {
-            cursor: pointer;
-            transition: background 0.2s ease-in-out;
-        }
-        .check-item:hover {
-            background: rgba(0, 0, 0, 0.03);
-        }
-        .check-box {
-            position: relative;
-            transition: all 0.2s ease-in-out;
-            border: 2px solid #717973; 
-        }
-        .check-item.done .check-box {
-            background-color: #116c4a;
-            border-color: #116c4a;
-        }
-        .check-item.done .check-box::after {
-            content: '';
-            position: absolute;
-            left: 6px;
-            top: 2px;
-            width: 5px;
-            height: 10px;
-            border: solid white;
-            border-width: 0 2px 2px 0;
-            transform: rotate(45deg);
-        }
-        .check-item.done .check-text {
-            color: #717973;
-            text-decoration: line-through;
-        }
-        
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; vertical-align: middle; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        html, body { overflow-x: hidden; background: white; }
+        .hero-gradient { background: radial-gradient(circle at top right, rgba(134, 215, 173, 0.4) 0%, rgba(255, 255, 255, 1) 60%); }
+        .check-item { cursor: pointer; transition: background 0.2s ease-in-out; }
+        .check-item:hover { background: rgba(0, 0, 0, 0.03); }
+        .check-box { position: relative; transition: all 0.2s ease-in-out; border: 2px solid #717973; }
+        .check-item.done .check-box { background-color: #116c4a; border-color: #116c4a; }
+        .check-item.done .check-box::after { content: ''; position: absolute; left: 6px; top: 2px; width: 5px; height: 10px; border: solid white; border-width: 0 2px 2px 0; transform: rotate(45deg); }
+        .check-item.done .check-text { color: #717973; text-decoration: line-through; }
         .care-card { cursor: pointer; }
-        
-        /* Modal Styles */
-        #img-modal {
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.3s ease;
-        }
-        #img-modal.active {
-            opacity: 1;
-            pointer-events: auto;
-        }
-
-        @media print {
-            .no-print { display: none !important; }
-            body { background: white; color: black; }
-            .print-border { border: 1px solid #ccc; }
-        }
+        #img-modal { opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
+        #img-modal.active { opacity: 1; pointer-events: auto; }
+        @media print { .no-print { display: none !important; } body { background: white; color: black; } .print-border { border: 1px solid #ccc; } }
     </style>
 </head>
 <body class="text-on-surface font-body selection:bg-[#a1f4c8] selection:text-[#1b724f] relative min-h-screen hero-gradient">
@@ -129,7 +74,6 @@
     </div>
 </div>
 
-<!-- TopAppBar -->
 <header class="sticky top-0 z-[60] bg-white/80 backdrop-blur-md border-b border-surface-variant/50 no-print">
     <div class="flex justify-between items-center px-4 md:px-8 py-4 md:py-6 max-w-screen-2xl mx-auto w-full">
         <div class="flex items-center gap-2">
@@ -151,7 +95,6 @@
 
 <main class="max-w-screen-2xl mx-auto px-4 sm:px-6 md:px-12 py-8 md:py-16">
 
-    <!-- Hero Section -->
     <section class="mb-16 md:mb-24 relative z-10">
         <div class="flex flex-col gap-6 md:gap-12 w-full max-w-2xl mt-12 md:mt-24">
             <h1 class="font-headline text-5xl sm:text-6xl md:text-8xl font-bold text-primary tracking-tight leading-[1.1] mb-2">
@@ -183,16 +126,16 @@
                 </thead>
                 <tbody class="divide-y divide-outline-variant/30">
                     <!-- Frequent -->
-                    <tr class="hover:bg-surface-container-low transition-colors cursor-pointer" onclick="openModal('Vittorio il Vanitoso', 'Coleus', 'https://images.unsplash.com/photo-1545239351-ef35f43d514b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80')">
+                    <tr class="hover:bg-surface-container-low transition-colors cursor-pointer" onclick="openModal('Carlotta la Medaglione', 'Calathea Medallion', './images/calathea_medallion_1774815411074.png')">
                         <td class="p-4 md:p-5">
-                            <span class="font-headline font-bold text-primary block text-sm border-b border-transparent hover:border-primary inline-block">Vittorio il Vanitoso</span>
-                            <span class="text-xs text-on-surface-variant italic block mt-0.5">Coleus</span>
+                            <span class="font-headline font-bold text-primary block text-sm border-b border-transparent hover:border-primary inline-block">Carlotta la Medaglione</span>
+                            <span class="text-xs text-on-surface-variant italic block mt-0.5">Calathea Medallion</span>
                         </td>
                         <td class="p-4 md:p-5 text-xs md:text-sm">Bright indirect</td>
                         <td class="p-4 md:p-5"><span class="px-2 md:px-3 py-1 bg-water-freq text-white rounded text-[9px] md:text-[10px] font-bold uppercase shadow-sm">Frequent</span></td>
-                        <td class="p-4 md:p-5 text-xs md:text-sm">Medium</td>
+                        <td class="p-4 md:p-5 text-xs md:text-sm">High</td>
                     </tr>
-                    <tr class="bg-surface-container-low/20 hover:bg-surface-container-low transition-colors cursor-pointer" onclick="openModal('Tito il Tropicale', 'Dwarf Banana', 'https://images.unsplash.com/photo-1597055181308-f213df65d8db?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80')">
+                    <tr class="bg-surface-container-low/20 hover:bg-surface-container-low transition-colors cursor-pointer" onclick="openModal('Tito il Tropicale', 'Dwarf Banana', './images/dwarf_banana_1774815301449.png')">
                         <td class="p-4 md:p-5">
                             <span class="font-headline font-bold text-primary block text-sm border-b border-transparent hover:border-primary inline-block">Tito il Tropicale</span>
                             <span class="text-xs text-on-surface-variant italic block mt-0.5">Dwarf Banana</span>
@@ -201,7 +144,7 @@
                         <td class="p-4 md:p-5"><span class="px-2 md:px-3 py-1 bg-water-freq text-white rounded text-[9px] md:text-[10px] font-bold uppercase shadow-sm">Frequent</span></td>
                         <td class="p-4 md:p-5 text-xs md:text-sm">High</td>
                     </tr>
-                    <tr class="hover:bg-surface-container-low transition-colors cursor-pointer" onclick="openModal('Beppe il Paludoso', 'Papyrus', 'https://images.unsplash.com/photo-1600411833196-7c0fecff0f81?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80')">
+                    <tr class="hover:bg-surface-container-low transition-colors cursor-pointer" onclick="openModal('Beppe il Paludoso', 'Papyrus', './images/papyrus_plant_1774815315625.png')">
                         <td class="p-4 md:p-5">
                             <span class="font-headline font-bold text-primary block text-sm border-b border-transparent hover:border-primary inline-block">Beppe il Paludoso</span>
                             <span class="text-xs text-on-surface-variant italic block mt-0.5">Papyrus</span>
@@ -211,7 +154,7 @@
                         <td class="p-4 md:p-5 text-xs md:text-sm">High</td>
                     </tr>
                     <!-- Moderate -->
-                    <tr class="bg-surface-container-low/20 hover:bg-surface-container-low transition-colors cursor-pointer" onclick="openModal('Pino il Precisino', 'Dracaena marginata', 'https://images.unsplash.com/photo-1616046229478-9901c5536a45?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80')">
+                    <tr class="bg-surface-container-low/20 hover:bg-surface-container-low transition-colors cursor-pointer" onclick="openModal('Pino il Precisino', 'Dracaena marginata', './images/dracaena_marginata_1774815215197.png')">
                         <td class="p-4 md:p-5">
                             <span class="font-headline font-bold text-primary block text-sm border-b border-transparent hover:border-primary inline-block">Pino il Precisino</span>
                             <span class="text-xs text-on-surface-variant italic block mt-0.5">Dracaena marginata</span>
@@ -220,7 +163,7 @@
                         <td class="p-4 md:p-5"><span class="px-2 md:px-3 py-1 bg-water-mod text-[#0b1f18] rounded text-[9px] md:text-[10px] font-bold uppercase shadow-sm">Moderate</span></td>
                         <td class="p-4 md:p-5 text-xs md:text-sm">Medium</td>
                     </tr>
-                    <tr class="hover:bg-surface-container-low transition-colors cursor-pointer" onclick="openModal('Gino lo Spilungone', 'Monstera deliciosa', 'https://images.unsplash.com/photo-1614594975525-e45190c55d0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80')">
+                    <tr class="hover:bg-surface-container-low transition-colors cursor-pointer" onclick="openModal('Gino lo Spilungone', 'Monstera deliciosa', './images/monstera_deliciosa_1774815229263.png')">
                         <td class="p-4 md:p-5">
                             <span class="font-headline font-bold text-primary block text-sm border-b border-transparent hover:border-primary inline-block">Gino lo Spilungone</span>
                             <span class="text-xs text-on-surface-variant italic block mt-0.5">Monstera deliciosa</span>
@@ -229,7 +172,7 @@
                         <td class="p-4 md:p-5"><span class="px-2 md:px-3 py-1 bg-water-mod text-[#0b1f18] rounded text-[9px] md:text-[10px] font-bold uppercase shadow-sm">Moderate</span></td>
                         <td class="p-4 md:p-5 text-xs md:text-sm">Medium</td>
                     </tr>
-                    <tr class="bg-surface-container-low/20 hover:bg-surface-container-low transition-colors cursor-pointer" onclick="openModal('Ubaldo il Polveroso', 'Dracaena Compacta', 'https://images.unsplash.com/photo-1610808386341-b8f41e57c8bf?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80')">
+                    <tr class="bg-surface-container-low/20 hover:bg-surface-container-low transition-colors cursor-pointer" onclick="openModal('Ubaldo il Polveroso', 'Dracaena Compacta', './images/dracaena_compacta_1774815255939.png')">
                         <td class="p-4 md:p-5">
                             <span class="font-headline font-bold text-primary block text-sm border-b border-transparent hover:border-primary inline-block">Ubaldo il Polveroso</span>
                             <span class="text-xs text-on-surface-variant italic block mt-0.5">Dracaena Compacta</span>
@@ -238,7 +181,7 @@
                         <td class="p-4 md:p-5"><span class="px-2 md:px-3 py-1 bg-water-mod text-[#0b1f18] rounded text-[9px] md:text-[10px] font-bold uppercase shadow-sm">Moderate</span></td>
                         <td class="p-4 md:p-5 text-xs md:text-sm">Low</td>
                     </tr>
-                    <tr class="hover:bg-surface-container-low transition-colors cursor-pointer" onclick="openModal('Regina la Drammatica', 'Peace Lily', 'https://images.unsplash.com/photo-1593691509543-c20fb51c114d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80')">
+                    <tr class="hover:bg-surface-container-low transition-colors cursor-pointer" onclick="openModal('Regina la Drammatica', 'Peace Lily', './images/peace_lily_1774815332185.png')">
                         <td class="p-4 md:p-5">
                             <span class="font-headline font-bold text-primary block text-sm border-b border-transparent hover:border-primary inline-block">Regina la Drammatica</span>
                             <span class="text-xs text-on-surface-variant italic block mt-0.5">Peace Lily</span>
@@ -247,7 +190,7 @@
                         <td class="p-4 md:p-5"><span class="px-2 md:px-3 py-1 bg-water-mod text-[#0b1f18] rounded text-[9px] md:text-[10px] font-bold uppercase shadow-sm">Moderate</span></td>
                         <td class="p-4 md:p-5 text-xs md:text-sm">High</td>
                     </tr>
-                    <tr class="bg-surface-container-low/20 hover:bg-surface-container-low transition-colors cursor-pointer" onclick="openModal('Diva la Pois', 'Begonia maculata', 'https://images.unsplash.com/photo-1612344070669-7ed97ebf0590?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80')">
+                    <tr class="bg-surface-container-low/20 hover:bg-surface-container-low transition-colors cursor-pointer" onclick="openModal('Diva la Pois', 'Begonia maculata', './images/begonia_maculata_1774815370464.png')">
                         <td class="p-4 md:p-5">
                             <span class="font-headline font-bold text-primary block text-sm border-b border-transparent hover:border-primary inline-block">Diva la Pois</span>
                             <span class="text-xs text-on-surface-variant italic block mt-0.5">Begonia maculata</span>
@@ -257,7 +200,7 @@
                         <td class="p-4 md:p-5 text-xs md:text-sm">High</td>
                     </tr>
                     <!-- Rare -->
-                    <tr class="hover:bg-surface-container-low transition-colors cursor-pointer" onclick="openModal('Rocco la Roccia', 'Jade Plant', 'https://images.unsplash.com/photo-1509423350716-97f9360b4e09?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80')">
+                    <tr class="hover:bg-surface-container-low transition-colors cursor-pointer" onclick="openModal('Rocco la Roccia', 'Jade Plant', './images/jade_plant_1774815241011.png')">
                         <td class="p-4 md:p-5">
                             <span class="font-headline font-bold text-primary block text-sm border-b border-transparent hover:border-primary inline-block">Rocco la Roccia</span>
                             <span class="text-xs text-on-surface-variant italic block mt-0.5">Jade Plant</span>
@@ -266,7 +209,7 @@
                         <td class="p-4 md:p-5"><span class="px-2 md:px-3 py-1 bg-water-rare text-[#422006] rounded text-[9px] md:text-[10px] font-bold uppercase shadow-sm">Rare</span></td>
                         <td class="p-4 md:p-5 text-xs md:text-sm">Low</td>
                     </tr>
-                    <tr class="bg-surface-container-low/20 hover:bg-surface-container-low transition-colors cursor-pointer" onclick="openModal('Marcello lo Splendente', 'Hoya Splash', 'https://images.unsplash.com/photo-1599598425947-330026293905?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80')">
+                    <tr class="bg-surface-container-low/20 hover:bg-surface-container-low transition-colors cursor-pointer" onclick="openModal('Marcello lo Splendente', 'Hoya Splash', './images/hoya_carnosa_1774815289069.png')">
                         <td class="p-4 md:p-5">
                             <span class="font-headline font-bold text-primary block text-sm border-b border-transparent hover:border-primary inline-block">Marcello lo Splendente</span>
                             <span class="text-xs text-on-surface-variant italic block mt-0.5">Hoya Splash</span>
@@ -275,7 +218,7 @@
                         <td class="p-4 md:p-5"><span class="px-2 md:px-3 py-1 bg-water-rare text-[#422006] rounded text-[9px] md:text-[10px] font-bold uppercase shadow-sm">Rare</span></td>
                         <td class="p-4 md:p-5 text-xs md:text-sm">Low</td>
                     </tr>
-                    <tr class="hover:bg-surface-container-low transition-colors cursor-pointer" onclick="openModal('Indro l\'Indistruttibile', 'ZZ Plant', 'https://images.unsplash.com/photo-1632207691143-643e2a9a9361?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80')">
+                    <tr class="hover:bg-surface-container-low transition-colors cursor-pointer" onclick="openModal('Indro l\'Indistruttibile', 'ZZ Plant', './images/zz_plant_1774815344718.png')">
                         <td class="p-4 md:p-5">
                             <span class="font-headline font-bold text-primary block text-sm border-b border-transparent hover:border-primary inline-block">Indro l'Indistruttibile</span>
                             <span class="text-xs text-on-surface-variant italic block mt-0.5">ZZ Plant</span>
@@ -284,7 +227,7 @@
                         <td class="p-4 md:p-5"><span class="px-2 md:px-3 py-1 bg-water-rare text-[#422006] rounded text-[9px] md:text-[10px] font-bold uppercase shadow-sm">Rare</span></td>
                         <td class="p-4 md:p-5 text-xs md:text-sm">Very Low</td>
                     </tr>
-                    <tr class="bg-surface-container-low/20 hover:bg-surface-container-low transition-colors cursor-pointer" onclick="openModal('Sole il Bagnante', 'Aloe Vera / Agave', 'https://images.unsplash.com/photo-1596547609652-9fc5d8d42409?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80')">
+                    <tr class="bg-surface-container-low/20 hover:bg-surface-container-low transition-colors cursor-pointer" onclick="openModal('Sole il Bagnante', 'Aloe Vera / Agave', './images/aloe_vera_1774815357643.png')">
                         <td class="p-4 md:p-5">
                             <span class="font-headline font-bold text-primary block text-sm border-b border-transparent hover:border-primary inline-block">Sole il Bagnante</span>
                             <span class="text-xs text-on-surface-variant italic block mt-0.5">Aloe Vera / Agave</span>
@@ -306,25 +249,24 @@
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8">
             
-            <!-- FREQUENT CARDS (Dark Green) -->
-            <article onclick="openModal('Vittorio il Vanitoso', 'Coleus', 'https://images.unsplash.com/photo-1545239351-ef35f43d514b?ixlib=rb-4.0.3')" class="care-card bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-all transform hover:-translate-y-1 border-t-[6px] border-water-freq print-border">
+            <article onclick="openModal('Carlotta la Medaglione', 'Calathea Medallion', './images/calathea_medallion_1774815411074.png')" class="care-card bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-all transform hover:-translate-y-1 border-t-[6px] border-water-freq print-border">
                 <div class="p-5 md:p-6 bg-surface-container-high/50 border-b border-outline-variant/10">
-                    <h3 class="font-headline font-bold text-primary text-xl leading-tight">Vittorio il Vanitoso</h3>
-                    <p class="text-[10px] font-label uppercase tracking-widest text-on-surface-variant mt-1 font-bold">Coleus</p>
+                    <h3 class="font-headline font-bold text-primary text-xl leading-tight">Carlotta la Medaglione</h3>
+                    <p class="text-[10px] font-label uppercase tracking-widest text-on-surface-variant mt-1 font-bold">Calathea Medallion</p>
                 </div>
                 <div class="p-5 md:p-6 space-y-4">
                     <div>
                         <p class="text-[9px] font-bold uppercase text-water-freq tracking-widest mb-1.5 flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-water-freq"></span> WATERING: FREQUENT</p>
-                        <p class="text-[13px] md:text-sm text-on-surface leading-relaxed">High thirst. Keep soil consistently damp.</p>
+                        <p class="text-[13px] md:text-sm text-on-surface leading-relaxed">Keep soil consistently moist. Do not dry out.</p>
                     </div>
                     <div>
                         <p class="text-[9px] font-bold uppercase text-outline tracking-wider mb-1">Light</p>
-                        <p class="text-[13px] md:text-sm text-on-surface leading-relaxed">Bright indirect to preserve vibrant hues.</p>
+                        <p class="text-[13px] md:text-sm text-on-surface leading-relaxed">Bright indirect to keep leaf patterns robust.</p>
                     </div>
                 </div>
             </article>
 
-            <article onclick="openModal('Tito il Tropicale', 'Dwarf Banana', 'https://images.unsplash.com/photo-1597055181308-f213df65d8db?ixlib=rb-4.0.3')" class="care-card bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-all transform hover:-translate-y-1 border-t-[6px] border-water-freq print-border">
+            <article onclick="openModal('Tito il Tropicale', 'Dwarf Banana', './images/dwarf_banana_1774815301449.png')" class="care-card bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-all transform hover:-translate-y-1 border-t-[6px] border-water-freq print-border">
                 <div class="p-5 md:p-6 bg-surface-container-high/50 border-b border-outline-variant/10">
                     <h3 class="font-headline font-bold text-primary text-xl leading-tight">Tito il Tropicale</h3>
                     <p class="text-[10px] font-label uppercase tracking-widest text-on-surface-variant mt-1 font-bold">Dwarf Banana</p>
@@ -341,7 +283,7 @@
                 </div>
             </article>
 
-            <article onclick="openModal('Beppe il Paludoso', 'Papyrus', 'https://images.unsplash.com/photo-1600411833196-7c0fecff0f81?ixlib=rb-4.0.3')" class="care-card bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-all transform hover:-translate-y-1 border-t-[6px] border-water-freq print-border">
+            <article onclick="openModal('Beppe il Paludoso', 'Papyrus', './images/papyrus_plant_1774815315625.png')" class="care-card bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-all transform hover:-translate-y-1 border-t-[6px] border-water-freq print-border">
                 <div class="p-5 md:p-6 bg-surface-container-high/50 border-b border-outline-variant/10">
                     <h3 class="font-headline font-bold text-primary text-xl leading-tight">Beppe il Paludoso</h3>
                     <p class="text-[10px] font-label uppercase tracking-widest text-on-surface-variant mt-1 font-bold">Papyrus</p>
@@ -358,8 +300,8 @@
                 </div>
             </article>
 
-            <!-- MODERATE CARDS (Light Green) -->
-            <article onclick="openModal('Pino il Precisino', 'Dracaena marginata', 'https://images.unsplash.com/photo-1616046229478-9901c5536a45?ixlib=rb-4.0.3')" class="care-card bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-all transform hover:-translate-y-1 border-t-[6px] border-water-mod print-border">
+            <!-- MODERATE CARDS -->
+            <article onclick="openModal('Pino il Precisino', 'Dracaena marginata', './images/dracaena_marginata_1774815215197.png')" class="care-card bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-all transform hover:-translate-y-1 border-t-[6px] border-water-mod print-border">
                 <div class="p-5 md:p-6 bg-surface-container-high/50 border-b border-outline-variant/10">
                     <h3 class="font-headline font-bold text-primary text-xl leading-tight">Pino il Precisino</h3>
                     <p class="text-[10px] font-label uppercase tracking-widest text-on-surface-variant mt-1 font-bold">Dracaena marginata</p>
@@ -376,7 +318,7 @@
                 </div>
             </article>
 
-            <article onclick="openModal('Gino lo Spilungone', 'Monstera deliciosa', 'https://images.unsplash.com/photo-1614594975525-e45190c55d0b?ixlib=rb-4.0.3')" class="care-card bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-all transform hover:-translate-y-1 border-t-[6px] border-water-mod print-border">
+            <article onclick="openModal('Gino lo Spilungone', 'Monstera deliciosa', './images/monstera_deliciosa_1774815229263.png')" class="care-card bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-all transform hover:-translate-y-1 border-t-[6px] border-water-mod print-border">
                 <div class="p-5 md:p-6 bg-surface-container-high/50 border-b border-outline-variant/10">
                     <h3 class="font-headline font-bold text-primary text-xl leading-tight">Gino lo Spilungone</h3>
                     <p class="text-[10px] font-label uppercase tracking-widest text-on-surface-variant mt-1 font-bold">Monstera deliciosa</p>
@@ -393,7 +335,7 @@
                 </div>
             </article>
 
-            <article onclick="openModal('Ubaldo il Polveroso', 'Dracaena Compacta', 'https://images.unsplash.com/photo-1610808386341-b8f41e57c8bf?ixlib=rb-4.0.3')" class="care-card bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-all transform hover:-translate-y-1 border-t-[6px] border-water-mod print-border">
+            <article onclick="openModal('Ubaldo il Polveroso', 'Dracaena Compacta', './images/dracaena_compacta_1774815255939.png')" class="care-card bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-all transform hover:-translate-y-1 border-t-[6px] border-water-mod print-border">
                 <div class="p-5 md:p-6 bg-surface-container-high/50 border-b border-outline-variant/10">
                     <h3 class="font-headline font-bold text-primary text-xl leading-tight">Ubaldo il Polveroso</h3>
                     <p class="text-[10px] font-label uppercase tracking-widest text-on-surface-variant mt-1 font-bold">Dracaena Compacta</p>
@@ -410,7 +352,7 @@
                 </div>
             </article>
 
-            <article onclick="openModal('Regina la Drammatica', 'Peace Lily', 'https://images.unsplash.com/photo-1593691509543-c20fb51c114d?ixlib=rb-4.0.3')" class="care-card bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-all transform hover:-translate-y-1 border-t-[6px] border-water-mod print-border">
+            <article onclick="openModal('Regina la Drammatica', 'Peace Lily', './images/peace_lily_1774815332185.png')" class="care-card bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-all transform hover:-translate-y-1 border-t-[6px] border-water-mod print-border">
                 <div class="p-5 md:p-6 bg-surface-container-high/50 border-b border-outline-variant/10">
                     <h3 class="font-headline font-bold text-primary text-xl leading-tight">Regina la Drammatica</h3>
                     <p class="text-[10px] font-label uppercase tracking-widest text-on-surface-variant mt-1 font-bold">Peace Lily</p>
@@ -427,7 +369,7 @@
                 </div>
             </article>
 
-             <article onclick="openModal('Diva la Pois', 'Begonia maculata', 'https://images.unsplash.com/photo-1612344070669-7ed97ebf0590?ixlib=rb-4.0.3')" class="care-card bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-all transform hover:-translate-y-1 border-t-[6px] border-water-mod print-border">
+             <article onclick="openModal('Diva la Pois', 'Begonia maculata', './images/begonia_maculata_1774815370464.png')" class="care-card bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-all transform hover:-translate-y-1 border-t-[6px] border-water-mod print-border">
                 <div class="p-5 md:p-6 bg-surface-container-high/50 border-b border-outline-variant/10">
                     <h3 class="font-headline font-bold text-primary text-xl leading-tight">Diva la Pois</h3>
                     <p class="text-[10px] font-label uppercase tracking-widest text-on-surface-variant mt-1 font-bold">Begonia maculata</p>
@@ -444,8 +386,8 @@
                 </div>
             </article>
 
-            <!-- RARE CARDS (Yellow) -->
-            <article onclick="openModal('Rocco la Roccia', 'Jade Plant', 'https://images.unsplash.com/photo-1509423350716-97f9360b4e09?ixlib=rb-4.0.3')" class="care-card bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-all transform hover:-translate-y-1 border-t-[6px] border-water-rare print-border">
+            <!-- RARE CARDS -->
+            <article onclick="openModal('Rocco la Roccia', 'Jade Plant', './images/jade_plant_1774815241011.png')" class="care-card bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-all transform hover:-translate-y-1 border-t-[6px] border-water-rare print-border">
                 <div class="p-5 md:p-6 bg-surface-container-high/50 border-b border-outline-variant/10">
                     <h3 class="font-headline font-bold text-primary text-xl leading-tight">Rocco la Roccia</h3>
                     <p class="text-[10px] font-label uppercase tracking-widest text-on-surface-variant mt-1 font-bold">Jade Plant</p>
@@ -462,7 +404,7 @@
                 </div>
             </article>
 
-            <article onclick="openModal('Marcello lo Splendente', 'Hoya Splash', 'https://images.unsplash.com/photo-1599598425947-330026293905?ixlib=rb-4.0.3')" class="care-card bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-all transform hover:-translate-y-1 border-t-[6px] border-water-rare print-border">
+            <article onclick="openModal('Marcello lo Splendente', 'Hoya Splash', './images/hoya_carnosa_1774815289069.png')" class="care-card bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-all transform hover:-translate-y-1 border-t-[6px] border-water-rare print-border">
                 <div class="p-5 md:p-6 bg-surface-container-high/50 border-b border-outline-variant/10">
                     <h3 class="font-headline font-bold text-primary text-xl leading-tight">Marcello lo Splendente</h3>
                     <p class="text-[10px] font-label uppercase tracking-widest text-on-surface-variant mt-1 font-bold">Hoya Splash</p>
@@ -479,7 +421,7 @@
                 </div>
             </article>
 
-            <article onclick="openModal('Indro l\'Indistruttibile', 'ZZ Plant', 'https://images.unsplash.com/photo-1632207691143-643e2a9a9361?ixlib=rb-4.0.3')" class="care-card bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-all transform hover:-translate-y-1 border-t-[6px] border-water-rare print-border">
+            <article onclick="openModal('Indro l\'Indistruttibile', 'ZZ Plant', './images/zz_plant_1774815344718.png')" class="care-card bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-all transform hover:-translate-y-1 border-t-[6px] border-water-rare print-border">
                 <div class="p-5 md:p-6 bg-surface-container-high/50 border-b border-outline-variant/10">
                     <h3 class="font-headline font-bold text-primary text-xl leading-tight">Indro l'Indistruttibile</h3>
                     <p class="text-[10px] font-label uppercase tracking-widest text-on-surface-variant mt-1 font-bold">ZZ Plant</p>
@@ -496,7 +438,7 @@
                 </div>
             </article>
 
-            <article onclick="openModal('Sole il Bagnante', 'Aloe Vera / Agave', 'https://images.unsplash.com/photo-1596547609652-9fc5d8d42409?ixlib=rb-4.0.3')" class="care-card bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-all transform hover:-translate-y-1 border-t-[6px] border-water-rare print-border">
+            <article onclick="openModal('Sole il Bagnante', 'Aloe Vera / Agave', './images/aloe_vera_1774815357643.png')" class="care-card bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-all transform hover:-translate-y-1 border-t-[6px] border-water-rare print-border">
                 <div class="p-5 md:p-6 bg-surface-container-high/50 border-b border-outline-variant/10">
                     <h3 class="font-headline font-bold text-primary text-xl leading-tight">Sole il Bagnante</h3>
                     <p class="text-[10px] font-label uppercase tracking-widest text-on-surface-variant mt-1 font-bold">Aloe Vera / Agave</p>
@@ -525,9 +467,9 @@
             <h2 class="font-headline text-2xl md:text-3xl font-bold mb-6 md:mb-8 text-[#a1f4c8]">Recovery Protocols</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10">
                 <div class="bg-white/5 p-5 md:p-6 rounded-xl border border-white/10">
-                    <h4 class="font-headline text-lg md:text-xl mb-3 font-semibold text-white">Coleus Rejuvenation</h4>
-                    <p class="text-[13px] md:text-sm text-white/80 leading-relaxed mb-4">If Vittorio looks vine-like, perform a <strong>Pinch</strong>. Cut stems back to just above a leaf node. This triggers dormant buds, creating a lush habit.</p>
-                    <span class="inline-block bg-[#86d7ad]/20 text-[#86d7ad] font-label text-[10px] uppercase font-bold tracking-widest px-2 py-1 rounded">Status: Active Pruning</span>
+                    <h4 class="font-headline text-lg md:text-xl mb-3 font-semibold text-white">Calathea Revival</h4>
+                    <p class="text-[13px] md:text-sm text-white/80 leading-relaxed mb-4">If Carlotta's leaves begin to heavily curl, soak her thoroughly with distilled water. Maintain strict humidity without misting the structured velvet foliage itself.</p>
+                    <span class="inline-block bg-[#86d7ad]/20 text-[#86d7ad] font-label text-[10px] uppercase font-bold tracking-widest px-2 py-1 rounded">Status: Moisture Stress</span>
                 </div>
                 <div class="bg-white/5 p-5 md:p-6 rounded-xl border border-white/10">
                     <h4 class="font-headline text-lg md:text-xl mb-3 font-semibold text-white">Monstera Acclimation</h4>
@@ -559,7 +501,6 @@
                     </div>
                     <span id="weekly-status" class="bg-primary/10 text-primary px-3 py-1 rounded-full text-[10px] md:text-xs font-bold font-label tracking-widest uppercase">0 / 6</span>
                 </div>
-                <!-- Checklist wrapper with max height for extreme mobile screens if needed, but flex-col is fine -->
                 <div id="weekly-checklist" class="space-y-3">
                     <!-- Populated by JS -->
                 </div>
@@ -592,21 +533,13 @@
         document.getElementById('img-modal').classList.add('active');
         document.body.style.overflow = 'hidden';
     }
-
     function closeModal() {
         document.getElementById('img-modal').classList.remove('active');
         document.body.style.overflow = '';
-        /* brief timeout to reset img src to prevent flash on next open */
-        setTimeout(() => {
-            document.getElementById('modal-img').src = '';
-        }, 300);
+        setTimeout(() => { document.getElementById('modal-img').src = ''; }, 300);
     }
-
-    // Close on escape key
     document.addEventListener('keydown', function(event) {
-        if (event.key === "Escape") {
-            closeModal();
-        }
+        if (event.key === "Escape") { closeModal(); }
     });
 </script>
 </body>
